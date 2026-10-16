@@ -1,0 +1,221 @@
+:root {
+    --bg-color: #3C005A;         
+    --card-bg: #800080;         
+    --text-color: #FFFFFF;       
+    --text-muted: #E6E6FA;       
+    --accent: #C79D7F;           
+    --accent-hover: #b58b6c;     
+    --border: rgba(230, 230, 250, 0.3);
+    --error: #ef4444;
+    --success: #34d399;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(135deg, #3C005A 0%, #800080 100%);
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 440px;
+    padding: 20px;
+}
+
+.auth-box {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.brand-logo {
+    max-width: 160px;
+    height: auto;
+    object-fit: contain;
+}
+
+.tab-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    background: rgba(60, 0, 90, 0.5);
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.tab-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+    background: var(--accent);
+    color: #3C005A;
+}
+
+.auth-form {
+    display: none;
+}
+
+.auth-form.active {
+    display: block;
+}
+
+.auth-form h2, #qr-view h2 {
+    margin-bottom: 5px;
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+
+.auth-form p, #qr-view p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+    color: var(--text-muted);
+}
+
+.input-group label i {
+    margin-right: 5px;
+    color: var(--accent);
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px 12px;
+    background: rgba(60, 0, 90, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: white;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input-group input::placeholder {
+    color: rgba(230, 230, 250, 0.5);
+}
+
+.input-group input:focus {
+    border-color: var(--accent);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--accent);
+    color: #3C005A;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+
+.submit-btn:hover {
+    background: var(--accent-hover);
+}
+
+.scan-btn {
+    background-color: #34d399;
+    color: #0f172a;
+}
+.scan-btn:hover {
+    background-color: #059669;
+}
+
+.logout-btn {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    color: #ff8080;
+    border: 1px solid #ff8080;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s;
+}
+.logout-btn:hover {
+    background: rgba(255, 128, 128, 0.1);
+}
+
+.notification {
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.badge-card {
+    background: rgba(60, 0, 90, 0.5);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.badge-card p {
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+.status-badge {
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+.badge-Ausente { background: rgba(239,68,68,0.2); color: #f87171; }
+.badge-Presente { background: rgba(52,211,153,0.2); color: #34d399; }
+
+.qr-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 15px;
+}

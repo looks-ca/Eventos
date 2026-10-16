@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Looks - Acceso</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="looks.png">
+</head>
+<body>
+
+    <div class="auth-container">
+        <div class="auth-box">
+            
+            <div class="logo-container">
+                <img src="looks.png" alt="Looks Eventos Logo" class="brand-logo" onerror="this.src='https://via.placeholder.com/150x60?text=Looks+Eventos'">
+            </div>
+
+            <div id="auth-view">
+                <div class="tab-buttons">
+                    <button id="tab-login-btn" class="tab-btn active">Iniciar Sesión</button>
+                    <button id="tab-register-btn" class="tab-btn">Registrarse</button>
+                </div>
+
+                <div id="auth-notification" class="notification" style="display: none;"></div>
+
+                <form id="login-form" class="auth-form active">
+                    <h2>Bienvenido</h2>
+                    <p>Ingresa tus datos para ver tu credencial QR.</p>
+                    
+                    <div class="input-group">
+                        <label for="login-doc"><i class="fa-solid fa-id-card"></i> Cédula</label>
+                        <input type="text" id="login-doc" required placeholder="Ej: 25123456">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="login-password"><i class="fa-solid fa-lock"></i> Contraseña</label>
+                        <input type="password" id="login-password" required placeholder="Tu contraseña">
+                    </div>
+
+                    <button type="submit" class="submit-btn">Ingresar</button>
+                </form>
+
+                <form id="register-form" class="auth-form">
+                    <h2>Registro de Invitado</h2>
+                    <p>Crea tu cuenta para generar tu pase de asistencia.</p>
+
+                    <div class="input-group">
+                        <label for="reg-name"><i class="fa-solid fa-user"></i> Nombre Completo</label>
+                        <input type="text" id="reg-name" required placeholder="Tu nombre y apellido">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="reg-doc"><i class="fa-solid fa-id-card"></i> Cédula</label>
+                        <input type="text" id="reg-doc" required placeholder="Cédula de identidad">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="reg-phone"><i class="fa-solid fa-phone"></i> Teléfono</label>
+                        <input type="text" id="reg-phone" required placeholder="0414-1234567">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="reg-origin"><i class="fa-solid fa-map-location-dot"></i> Procedencia</label>
+                        <input type="text" id="reg-origin" required placeholder="Ciudad o Institución">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="reg-password"><i class="fa-solid fa-lock"></i> Contraseña</label>
+                        <input type="password" id="reg-password" required placeholder="Crea una contraseña">
+                    </div>
+
+                    <button type="submit" class="submit-btn">Registrarse</button>
+                </form>
+            </div>
+
+            <div id="qr-view" style="display: none;">
+                <h2>Tu Credencial Digital</h2>
+                <p>Presenta este código QR en la entrada del evento.</p>
+
+                <div class="badge-card">
+                    <p><strong>Nombre:</strong> <span id="user-display-name"></span></p>
+                    <p><strong>Cédula:</strong> <span id="badge-doc"></span></p>
+                    <p><strong>Procedencia:</strong> <span id="badge-origin"></span></p>
+                    <p><strong>Estado:</strong> <span id="badge-status" class="status-badge">Ausente</span></p>
+                    
+                    <div class="qr-box">
+                        <div id="qrcode"></div>
+                    </div>
+                </div>
+
+                <button id="logout-btn" class="logout-btn">Cerrar Sesión</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
