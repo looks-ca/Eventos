@@ -179,7 +179,7 @@ loginForm.addEventListener('submit', async (e) => {
             }
 
             currentUserDocId = foundId;
-            welcomeMessage.textContent = `Bienvenido, ${foundUser.name}`;
+            welcomeMessage.textContent = `Bienvenido/a, ${foundUser.name}`;
             userDisplayName.textContent = foundUser.name;
             badgeDoc.textContent = foundUser.doc;
             badgeOrigin.textContent = foundUser.origin || 'N/A';
@@ -316,4 +316,25 @@ logoutBtn.addEventListener('click', () => {
     loginForm.reset();
     qrView.style.display = 'none';
     authView.style.display = 'block';
+
+});
+
+// MOSTRAR Y OCULTAR CONTRASEÑAS (OJITO)
+document.querySelectorAll('.toggle-password').forEach(icon => {
+    icon.addEventListener('click', function() {
+        // Obtener el ID del input asociado al ícono clickeado
+        const targetId = this.getAttribute('data-target');
+        const inputField = document.getElementById(targetId);
+        
+        // Cambiar el tipo de input y el ícono
+        if (inputField.type === 'password') {
+            inputField.type = 'text';
+            this.classList.remove('fa-eye');
+            this.classList.add('fa-eye-slash'); // Cambia al ícono de ojo tachado
+        } else {
+            inputField.type = 'password';
+            this.classList.remove('fa-eye-slash');
+            this.classList.add('fa-eye'); // Vuelve al ícono normal
+        }
+    });
 });

@@ -58,7 +58,10 @@
 
                     <div class="input-group">
                         <label for="login-password"><i class="fa-solid fa-lock"></i> Contraseña</label>
-                        <input type="password" id="login-password" required placeholder="Tu contraseña">
+                        <div class="password-wrapper">
+                            <input type="password" id="login-password" required placeholder="Tu contraseña">
+                            <i class="fa-solid fa-eye toggle-password" data-target="login-password"></i>
+                        </div>
                     </div>
 
                     <a class="forgot-link" id="btn-forgot-password">¿Se te olvidó la contraseña?</a>
@@ -141,7 +144,10 @@
 
                     <div class="input-group">
                         <label for="reg-password"><i class="fa-solid fa-lock"></i> Contraseña</label>
-                        <input type="password" id="reg-password" required placeholder="Crea una contraseña">
+                        <div class="password-wrapper">
+                            <input type="password" id="reg-password" required placeholder="Crea una contraseña">
+                            <i class="fa-solid fa-eye toggle-password" data-target="reg-password"></i>
+                        </div>
                     </div>
 
                     <button type="submit" class="submit-btn">Registrarse</button>
@@ -175,7 +181,10 @@
                     <p>Crea tu nueva contraseña de acceso.</p>
                     <div class="input-group">
                         <label><i class="fa-solid fa-lock"></i> Nueva Contraseña</label>
-                        <input type="password" id="rec-new-password" required placeholder="Nueva contraseña">
+                        <div class="password-wrapper">
+                            <input type="password" id="rec-new-password" required placeholder="Nueva contraseña">
+                            <i class="fa-solid fa-eye toggle-password" data-target="rec-new-password"></i>
+                        </div>
                     </div>
                     <button type="submit" class="submit-btn">Guardar Contraseña</button>
                 </form>
