@@ -1,11 +1,11 @@
 :root {
-    --bg-color: #70119E;         /* Púrpura Principal - Fondo */
-    --card-bg: #8E30BA;          /* Morado más claro para la tarjeta */
-    --text-color: #FFFFFF;       /* Texto blanco para contrastar con la tarjeta morada */
-    --text-muted: #E2C4F5;       /* Tono lila claro para textos secundarios */
-    --accent: #FFFFFF;           /* Blanco - Botones de acción (reemplaza al rosa) */
-    --accent-hover: #EBEBEB;     /* Blanco ligeramente oscuro para el hover */
-    --border: rgba(255, 255, 255, 0.2); /* Bordes sutiles blancos y translúcidos */
+    --bg-color: #70119E;
+    --card-bg: #8E30BA;
+    --text-color: #FFFFFF;
+    --text-muted: #E2C4F5;
+    --accent: #FFFFFF;
+    --accent-hover: #EBEBEB;
+    --border: rgba(255, 255, 255, 0.2);
     --error: #ef4444;
     --success: #34d399;
 }
@@ -76,7 +76,7 @@ body {
 
 .tab-btn.active {
     background: var(--accent);
-    color: var(--bg-color); /* Texto morado sobre el botón blanco */
+    color: var(--bg-color);
 }
 
 .auth-form {
@@ -112,13 +112,50 @@ body {
 
 .input-group label i {
     margin-right: 5px;
-    color: var(--accent); /* Iconos en blanco */
+    color: var(--accent);
+}
+
+/* ESTILOS PARA LOS SELECTORES EN FILA */
+.input-row {
+    display: flex;
+    gap: 8px;
+}
+.input-row select {
+    width: 25%;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-color);
+    outline: none;
+    cursor: pointer;
+}
+.input-row input {
+    width: 75%;
+}
+
+/* SELECTOR COMPLETO (PROCEDENCIA) */
+.full-select {
+    width: 100%;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-color);
+    outline: none;
+    cursor: pointer;
+}
+
+/* COLOR DE LAS OPCIONES DEL SELECT PARA QUE SE LEAN EN FONDOS CLAROS/OSCUROS */
+select option {
+    color: #333;
+    background: #FFF;
 }
 
 .input-group input {
     width: 100%;
     padding: 10px 12px;
-    background: rgba(255, 255, 255, 0.1); /* Fondo translúcido claro para inputs */
+    background: rgba(255, 255, 255, 0.1);
     border: 1px solid var(--border);
     border-radius: 6px;
     color: var(--text-color);
@@ -131,15 +168,31 @@ body {
     color: rgba(255, 255, 255, 0.6);
 }
 
-.input-group input:focus {
+.input-group input:focus, .input-row select:focus, .full-select:focus {
     border-color: var(--accent);
+}
+
+/* ENLACE DE RECUPERAR CONTRASEÑA */
+.forgot-link {
+    display: block;
+    text-align: right;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: -5px;
+    margin-bottom: 15px;
+    transition: color 0.3s;
+}
+.forgot-link:hover {
+    color: var(--text-color);
 }
 
 .submit-btn {
     width: 100%;
     padding: 12px;
     background: var(--accent);
-    color: var(--bg-color); /* Texto morado para contrastar con el blanco */
+    color: var(--bg-color);
     border: none;
     border-radius: 6px;
     font-weight: bold;
@@ -152,12 +205,26 @@ body {
     background: var(--accent-hover);
 }
 
+.back-btn {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--text-muted);
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s;
+}
+.back-btn:hover {
+    background: rgba(255,255,255,0.1);
+    color: var(--text-color);
+}
+
 .scan-btn {
     background-color: var(--bg-color);
     color: #FFFFFF;
-}
-.scan-btn:hover {
-    background-color: #4a096b;
 }
 
 .logout-btn {

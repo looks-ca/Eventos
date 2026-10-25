@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Looks - Acceso</title>
 
-    <!-- METADATOS VISTA PREVIA (WHATSAPP Y REDES SOCIALES) -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Looks - Acceso">
     <meta property="og:description" content="Ingresa o regístrate para generar tu pase de asistencia y credencial QR para el evento.">
@@ -16,6 +15,12 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="looks2.png" type="image/png">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+       (function(){
+          emailjs.init("ZbfQ3LJ2UuauPoXL5"); // Reemplaza esto con tu Public Key de EmailJS
+       })();
+    </script>
 </head>
 <body>
 
@@ -34,13 +39,21 @@
 
                 <div id="auth-notification" class="notification" style="display: none;"></div>
 
+                <!-- FORMULARIO DE LOGIN -->
                 <form id="login-form" class="auth-form active">
                     <h2>Acceder</h2>
                     <p>Ingresa tus datos para ver tus credenciales</p>
                     
                     <div class="input-group">
-                        <label for="login-doc"><i class="fa-solid fa-id-card"></i> Cédula</label>
-                        <input type="text" id="login-doc" required placeholder="Ej: 25123456">
+                        <label><i class="fa-solid fa-id-card"></i> Cédula</label>
+                        <div class="input-row">
+                            <select id="login-doc-type">
+                                <option value="V-">V</option>
+                                <option value="J-">J</option>
+                                <option value="E-">E</option>
+                            </select>
+                            <input type="text" id="login-doc" required placeholder="Ej: 25123456">
+                        </div>
                     </div>
 
                     <div class="input-group">
@@ -48,12 +61,15 @@
                         <input type="password" id="login-password" required placeholder="Tu contraseña">
                     </div>
 
+                    <a class="forgot-link" id="btn-forgot-password">¿Se te olvidó la contraseña?</a>
+
                     <button type="submit" class="submit-btn">Ingresar</button>
                 </form>
 
+                <!-- FORMULARIO DE REGISTRO -->
                 <form id="register-form" class="auth-form">
                     <h2>Registro</h2>
-                    <p>Registrate para generar tu pase de asistencia.</p>
+                    <p>Registrate para generar tu pase.</p>
 
                     <div class="input-group">
                         <label for="reg-name"><i class="fa-solid fa-user"></i> Nombre Completo</label>
@@ -61,18 +77,66 @@
                     </div>
 
                     <div class="input-group">
-                        <label for="reg-doc"><i class="fa-solid fa-id-card"></i> Cédula</label>
-                        <input type="text" id="reg-doc" required placeholder="Cédula de identidad">
+                        <label for="reg-email"><i class="fa-solid fa-envelope"></i> Correo Electrónico</label>
+                        <input type="email" id="reg-email" required placeholder="ejemplo@correo.com">
                     </div>
 
                     <div class="input-group">
-                        <label for="reg-phone"><i class="fa-solid fa-phone"></i> Teléfono</label>
-                        <input type="text" id="reg-phone" required placeholder="0414-1234567">
+                        <label><i class="fa-solid fa-id-card"></i> Cédula</label>
+                        <div class="input-row">
+                            <select id="reg-doc-type">
+                                <option value="V-">V</option>
+                                <option value="J-">J</option>
+                                <option value="E-">E</option>
+                            </select>
+                            <input type="text" id="reg-doc" required placeholder="Ej: 25123456">
+                        </div>
                     </div>
 
                     <div class="input-group">
-                        <label for="reg-origin"><i class="fa-solid fa-map-location-dot"></i> Procedencia</label>
-                        <input type="text" id="reg-origin" required placeholder="Ciudad o Institución">
+                        <label><i class="fa-solid fa-phone"></i> Teléfono</label>
+                        <div class="input-row">
+                            <select id="reg-phone-code">
+                                <option value="0414-">0414</option>
+                                <option value="0424-">0424</option>
+                                <option value="0412-">0412</option>
+                                <option value="0422-">0422</option>
+                                <option value="0416-">0416</option>
+                                <option value="0426-">0426</option>
+                            </select>
+                            <input type="text" id="reg-phone" required placeholder="1234567">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="reg-origin"><i class="fa-solid fa-map-location-dot"></i> Procedencia (Estado)</label>
+                        <select id="reg-origin" required class="full-select">
+                            <option value="" disabled selected>Selecciona tu estado...</option>
+                            <option value="Amazonas">Amazonas</option>
+                            <option value="Anzoátegui">Anzoátegui</option>
+                            <option value="Apure">Apure</option>
+                            <option value="Aragua">Aragua</option>
+                            <option value="Barinas">Barinas</option>
+                            <option value="Bolívar">Bolívar</option>
+                            <option value="Carabobo">Carabobo</option>
+                            <option value="Cojedes">Cojedes</option>
+                            <option value="Delta Amacuro">Delta Amacuro</option>
+                            <option value="Distrito Capital">Distrito Capital</option>
+                            <option value="Falcón">Falcón</option>
+                            <option value="Guárico">Guárico</option>
+                            <option value="Lara">Lara</option>
+                            <option value="Mérida">Mérida</option>
+                            <option value="Miranda">Miranda</option>
+                            <option value="Monagas">Monagas</option>
+                            <option value="Nueva Esparta">Nueva Esparta</option>
+                            <option value="Portuguesa">Portuguesa</option>
+                            <option value="Sucre">Sucre</option>
+                            <option value="Táchira">Táchira</option>
+                            <option value="Trujillo">Trujillo</option>
+                            <option value="La Guaira">La Guaira (Vargas)</option>
+                            <option value="Yaracuy">Yaracuy</option>
+                            <option value="Zulia">Zulia</option>
+                        </select>
                     </div>
 
                     <div class="input-group">
@@ -82,10 +146,44 @@
 
                     <button type="submit" class="submit-btn">Registrarse</button>
                 </form>
+
+                <!-- FLUJO DE RECUPERACIÓN DE CONTRASEÑA -->
+                <form id="recover-step1" class="auth-form">
+                    <h2>Recuperar Contraseña</h2>
+                    <p>Ingresa tu correo registrado para enviarte un código.</p>
+                    <div class="input-group">
+                        <label><i class="fa-solid fa-envelope"></i> Correo Electrónico</label>
+                        <input type="email" id="rec-email" required placeholder="ejemplo@correo.com">
+                    </div>
+                    <button type="submit" class="submit-btn">Enviar Código</button>
+                    <button type="button" class="back-btn btn-back-login">Volver</button>
+                </form>
+
+                <form id="recover-step2" class="auth-form">
+                    <h2>Verificar Código</h2>
+                    <p>Ingresa el código de 6 dígitos que te enviamos.</p>
+                    <div class="input-group">
+                        <label><i class="fa-solid fa-hashtag"></i> Código de Seguridad</label>
+                        <input type="text" id="rec-code" required placeholder="123456" maxlength="6">
+                    </div>
+                    <button type="submit" class="submit-btn">Verificar</button>
+                    <button type="button" class="back-btn btn-back-login">Cancelar</button>
+                </form>
+
+                <form id="recover-step3" class="auth-form">
+                    <h2>Nueva Contraseña</h2>
+                    <p>Crea tu nueva contraseña de acceso.</p>
+                    <div class="input-group">
+                        <label><i class="fa-solid fa-lock"></i> Nueva Contraseña</label>
+                        <input type="password" id="rec-new-password" required placeholder="Nueva contraseña">
+                    </div>
+                    <button type="submit" class="submit-btn">Guardar Contraseña</button>
+                </form>
+
             </div>
 
             <div id="qr-view" style="display: none;">
-                <h2>Tu Credencial</h2>
+                <h2 id="welcome-message">Tu Credencial</h2>
                 <p>Presenta este código QR en la entrada del evento.</p>
 
                 <div class="badge-card">
