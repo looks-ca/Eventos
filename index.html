@@ -146,8 +146,16 @@
                     <div class="input-group">
                         <label for="reg-password"><i class="fa-solid fa-lock"></i> Contraseña</label>
                         <div class="password-wrapper">
-                            <input type="password" id="reg-password" required placeholder="Crea una contraseña">
+                            <input type="password" id="reg-password" required minlength="8" placeholder="Mínimo 8 caracteres">
                             <i class="fa-solid fa-eye toggle-password" data-target="reg-password"></i>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="reg-confirm-password"><i class="fa-solid fa-lock"></i> Confirmar Contraseña</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="reg-confirm-password" required minlength="8" placeholder="Repite tu contraseña">
+                            <i class="fa-solid fa-eye toggle-password" data-target="reg-confirm-password"></i>
                         </div>
                     </div>
 
@@ -180,13 +188,23 @@
                 <form id="recover-step3" class="auth-form">
                     <h2>Nueva Contraseña</h2>
                     <p>Crea tu nueva contraseña de acceso.</p>
+                    
                     <div class="input-group">
-                        <label><i class="fa-solid fa-lock"></i> Nueva Contraseña</label>
+                        <label for="rec-new-password"><i class="fa-solid fa-lock"></i> Nueva Contraseña</label>
                         <div class="password-wrapper">
-                            <input type="password" id="rec-new-password" required placeholder="Nueva contraseña">
+                            <input type="password" id="rec-new-password" required minlength="8" placeholder="Mínimo 8 caracteres">
                             <i class="fa-solid fa-eye toggle-password" data-target="rec-new-password"></i>
                         </div>
                     </div>
+
+                    <div class="input-group">
+                        <label for="rec-confirm-password"><i class="fa-solid fa-lock"></i> Confirmar Nueva Contraseña</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="rec-confirm-password" required minlength="8" placeholder="Repite tu contraseña">
+                            <i class="fa-solid fa-eye toggle-password" data-target="rec-confirm-password"></i>
+                        </div>
+                    </div>
+
                     <button type="submit" class="submit-btn">Guardar Contraseña</button>
                 </form>
 
@@ -205,6 +223,10 @@
                     <div class="qr-box">
                         <div id="qrcode"></div>
                     </div>
+
+                    <button id="download-qr-btn" class="submit-btn" style="margin-top: 15px;">
+                        <i class="fa-solid fa-download"></i> Descargar QR
+                    </button>
                 </div>
 
                 <button id="logout-btn" class="logout-btn">Cerrar Sesión</button>

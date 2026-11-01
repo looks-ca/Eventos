@@ -41,6 +41,7 @@ const badgeDoc = document.getElementById('badge-doc');
 const badgeOrigin = document.getElementById('badge-origin');
 const badgeStatus = document.getElementById('badge-status');
 const qrcodeContainer = document.getElementById('qrcode');
+const downloadQrBtn = document.getElementById('download-qr-btn');
 const logoutBtn = document.getElementById('logout-btn');
 const welcomeMessage = document.getElementById('welcome-message');
 
@@ -111,6 +112,18 @@ registerForm.addEventListener('submit', async (e) => {
 
     const origin = document.getElementById('reg-origin').value;
     const password = document.getElementById('reg-password').value.trim();
+    const confirmPassword = document.getElementById('reg-confirm-password').value.trim();
+
+    // Validaciones de contraseña
+    if (password.length < 8) {
+        showNotification("La contraseña debe tener al menos 8 caracteres.", true);
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        showNotification("Las contraseñas no coinciden.", true);
+        return;
+    }
 
     try {
         const querySnapshot = await getDocs(collection(db, COLLECTION_NAME));
@@ -234,7 +247,7 @@ recoverStep1.addEventListener('submit', async (e) => {
 
         recoveryUserId = foundUser;
         
-// ENVÍO DE CORREO REAL CON EMAILJS
+        // ENVÍO DE CORREO REAL CON EMAILJS
         showNotification("Enviando código, por favor espera...");
         
         try {
@@ -288,6 +301,18 @@ recoverStep2.addEventListener('submit', async (e) => {
 recoverStep3.addEventListener('submit', async (e) => {
     e.preventDefault();
     const newPassword = document.getElementById('rec-new-password').value.trim();
+    const confirmPassword = document.getElementById('rec-confirm-password').value.trim();
+
+    // Validaciones de contraseña
+    if (newPassword.length < 8) {
+        showNotification("La contraseña debe tener al menos 8 caracteres.", true);
+        return;
+    }
+
+    if (newPassword !== confirmPassword) {
+        showNotification("Las contraseñas no coinciden.", true);
+        return;
+    }
 
     try {
         const userRef = doc(db, COLLECTION_NAME, recoveryUserId);
@@ -310,31 +335,80 @@ recoverStep3.addEventListener('submit', async (e) => {
     }
 });
 
+// DESCARGAR IMAGEN DEL CÓDIGO QR (CON FONDO BLANCO Y MARGEN DE SEGURIDAD)
+downloadQrBtn.addEventListener('click', () => {
+    const qrImg = qrcodeContainer.querySelector('img');
+    const qrCanvas = qrcodeContainer.querySelector('canvas');
+    
+    // Identificar el elemento origen
+    const sourceElement = (qrCanvas && qrCanvas.width > 0) ? qrCanvas : qrImg;
+
+    if (!sourceElement) {
+        showNotification("No se pudo obtener la imagen del QR.", true);
+        return;
+    }
+
+    const downloadWithCanvas = (element) => {
+        const padding = 20; // Borde blanco (Quiet Zone) requerido por los escáneres
+        const tempCanvas = document.createElement('canvas');
+        const ctx = tempCanvas.getContext('2d');
+
+        const qrWidth = element.naturalWidth || element.width || 180;
+        const qrHeight = element.naturalHeight || element.height || 180;
+
+        // Definir dimensiones totales del canvas con el margen
+        tempCanvas.width = qrWidth + (padding * 2);
+        tempCanvas.height = qrHeight + (padding * 2);
+
+        // 1. Pintar fondo blanco sólido
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+
+        // 2. Dibujar el QR centrado dentro del marco blanco
+        ctx.drawImage(element, padding, padding, qrWidth, qrHeight);
+
+        // 3. Forzar descarga de la imagen PNG lista para lectura
+        const link = document.createElement('a');
+        link.href = tempCanvas.toDataURL("image/png");
+        link.download = `QR_${badgeDoc.textContent.trim() || 'Credencial'}.png`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
+    if (sourceElement.tagName.toLowerCase() === 'img') {
+        if (sourceElement.complete && sourceElement.src) {
+            downloadWithCanvas(sourceElement);
+        } else {
+            sourceElement.onload = () => downloadWithCanvas(sourceElement);
+        }
+    } else {
+        downloadWithCanvas(sourceElement);
+    }
+});
+
 // CERRAR SESIÓN
 logoutBtn.addEventListener('click', () => {
     currentUserDocId = null;
     loginForm.reset();
     qrView.style.display = 'none';
     authView.style.display = 'block';
-
 });
 
 // MOSTRAR Y OCULTAR CONTRASEÑAS (OJITO)
 document.querySelectorAll('.toggle-password').forEach(icon => {
     icon.addEventListener('click', function() {
-        // Obtener el ID del input asociado al ícono clickeado
         const targetId = this.getAttribute('data-target');
         const inputField = document.getElementById(targetId);
         
-        // Cambiar el tipo de input y el ícono
         if (inputField.type === 'password') {
             inputField.type = 'text';
             this.classList.remove('fa-eye');
-            this.classList.add('fa-eye-slash'); // Cambia al ícono de ojo tachado
+            this.classList.add('fa-eye-slash');
         } else {
             inputField.type = 'password';
             this.classList.remove('fa-eye-slash');
-            this.classList.add('fa-eye'); // Vuelve al ícono normal
+            this.classList.add('fa-eye');
         }
     });
 });
